@@ -1,6 +1,18 @@
-GUI PROJECTS
+# python_projects
 
-The purpose of these files is to create an application that is
-composed of other apps. Think of it as a menu on a computer
-that can open, for instance, a game, a calculator, or
-a timer.
+These are multiple python projects I want to show to others. My hope is for others to view and provide
+feedback on these projects so I can improve my coding skills.
+
+UPLOADED FILES:
+  - Digital Root
+  
+FILES WAITING TO BE UPLOAD:
+  - Payment Plan
+  - Number Guessing Game
+  - Calculator
+  - Dice Roller
+  
+FILE CURRENTLY WORKING ON:
+  - Rock, Paper, Scissors
+  
+
