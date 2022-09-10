@@ -11,6 +11,10 @@ RULES:
       the following should happen:
          > add each digit to each to create new number
          > repeat step until you get 1 digit
+
+
+THINGS TO WORK ON:
+    - What if the number was negative?
 """
 
 def add_digits(N):
@@ -37,20 +41,26 @@ def calculate_dr(N):
 
     Uses add_digit method to find digital root.
     """
+    #checks number is negative
+    temp = ""
+    if '-' in N:
+        temp = N[0]
+        N = N[1:]
+    if len(N)==1:
+        return (temp + N)
     while found_dr(N)==False:
         ans = add_digits(N)
         N = ans
-        print(ans)
-    return ans
+        print(temp + ans)
+    return (temp + ans)
     
 
 if __name__=="__main__":
-    #number = input("Enter a number: ")
     while True:
         number = input("Enter a number: ")
         ans = calculate_dr(number)
         print("Digital Root:", ans)
-        redo = input("Do you want to find another digital root? [Y]/[N]")
+        redo = input("Do you want to find another digital root? [Y]/[N] ")
         if redo=="n" or redo=="N":
             break
     print("Closing...")
