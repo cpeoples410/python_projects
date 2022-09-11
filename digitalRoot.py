@@ -41,7 +41,7 @@ def calculate_dr(N):
 
     Uses add_digit method to find digital root.
     """
-    #checks number is negative
+    #checks if the number is negative
     temp = ""
     if '-' in N:
         temp = N[0]
