@@ -1,5 +1,6 @@
 import random as r
-from hangman_wordlist import *
+import hangman_wordlist as hw
+#from hangman_wordlist import *
 #from HangmanPlayer import *
 
 #Hangman Project
@@ -17,7 +18,7 @@ Things needed for game:
           (doesn't affect spaces between words)
     - functions
         > allow player to pick one of the word lists
-        > let user guess full word(s)
+        > let user guess full word(s) (EXCLUDED FOR NOW)
         > (sounds similar to wheel of fortune)
     - scoring
 """
@@ -37,14 +38,9 @@ board = ["_ _ _ _ ------| _ _",
 
 
 
-
-
-
-
-
 #-------------------------------------------------------------#
 
-
+'''
 class Hangman:
     """Class that controls functionality of the game"""
     
@@ -83,40 +79,58 @@ class Hangman:
         """
         """
         return 0
-
+'''
 
 #-------------------------------------------------------------#
 
-def run():
-    """dict{category: [list of words]} -> None"""
-    while True:
-        print("What would you like to do?")
-        playerRes = input("GUESS LETTER -- GUESS WORD -- QUIT GAME").upper()
-        if playerRes == "GUESS LETTER":
-            char = input("Guess a letter: ")
-        elif playerRes == "GUESS LETTER":
-            guess = input("What is the word? ")
-        elif playerRes == "QUIT GAME":
-            break
-    #if word is guessed correctly, show winner
-    #else, show loser
+def replaceLetters(space, word, letter):
+    """(string, char) -> 
+
+    Replace all empty spaces with the letters
+    """
+    temp = ""
+    for index in range(len(word)):
+        if letter == word[index]:
+            temp = temp + letter
+        else:
+            temp = temp + space[index]
+    space = temp
+    return space
+
+def run(target_word):
+    """(string) -> None"""
+    space = '_' * len(target_word)
+    while ('_' in space):
+        guess = input("Guess a letter: ")
+        if guess in target_word:
+            space = replaceLetters(space, target_word, guess)
+        else:
+            #will be changed
+            print("Letter not found.")
+        print(space)
+    print(space, "has been found")
 
 
 if __name__=="__main__":
     print("Welcome to HANGMAN! Which of these categories would you like?")
     #check to see if word is in category
     counter = 0
+    rand_word = ""
     while True:
-        category = input("ANIMAL -- SPORTS -- FOOD -- CARTOONS -- VIDEOGAMES")
-        if category not in CATEGORIES:
-            print("I'm sorry, that is not a theme from the category. Please pick another one:")
-            counter+=1
-        if counter == 5:
+        category = input("ANIMAL -- SPORTS -- FOOD -- CARTOONS -- VIDEOGAMES\n").lower()
+        if counter==4:
             print("TOO MANY ERRORS! ENDING GAME NOW!")
             break
+        elif category not in hw.CATEGORIES:
+            print("I'm sorry, that is not a theme from the category. Please pick another one:")
+            counter+=1
         else:
-            run()
-    print()
+            rand_word = r.choice(hw.CATEGORIES[category])
+            print(rand_word)
+            break
+    if counter<4:
+        run(rand_word)
+    print("END OF GAME")
 
 
 
