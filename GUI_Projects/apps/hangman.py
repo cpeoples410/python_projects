@@ -1,7 +1,5 @@
 import random as r
 import hangman_wordlist as hw
-#from hangman_wordlist import *
-#from HangmanPlayer import *
 
 #Hangman Project
 """
@@ -83,10 +81,25 @@ class Hangman:
 
 #-------------------------------------------------------------#
 
-def replaceSpaces(space, word, letter):
-    """(string, char) -> 
+def createLines(word):
+    """(string) -> string
 
-    Replace all empty spaces with the letters
+    Given a string, replace all alphabetical
+    characters with underscores.
+    """
+    temp = ""
+    for index in range(len(word)):
+        if word[index].isalpha():
+            temp = temp + '_'
+        else:
+            temp = temp + word[index]
+    return temp
+
+def showLetters(space, word, letter):
+    """(string, char) -> string
+
+    Return a new string where a target letter
+    replaces an empty line.
     """
     temp = ""
     for index in range(len(word)):
@@ -99,16 +112,17 @@ def replaceSpaces(space, word, letter):
 
 def run(target_word):
     """(string) -> None"""
-    space = '_' * len(target_word)
-    while ('_' in space):
+    hidden = createLines(target_word)
+    print(hidden)
+    while ('_' in hidden):
         guess = input("Guess a letter: ")
         if guess in target_word:
-            space = replaceSpaces(space, target_word, guess)
+            hidden = showLetters(hidden, target_word, guess)
         else:
             #will be changed
             print("Letter not found.")
-        print(space)
-    print(space, "has been found")
+        print(hidden)
+    print(hidden, "has been found")
 
 
 if __name__=="__main__":

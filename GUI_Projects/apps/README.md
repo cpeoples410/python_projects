@@ -9,13 +9,15 @@ BOARD
 		  any non-alphabetical characters
 
 FUNCTIONS
-	- replaceSpaces -> replace spaces with letter if
+	- showLetters 	-> replace spaces with letter if
 			   player guesses correct letter
 			   (80%, TESTING)
 	- run 		-> runs the game using helper functions
 			   (40%)
 	- guessWord	-> Player will guess what the word is
 			   (0%)
+	- createLines	-> Hide all letters with underscores
+			   (90%, TESTING)
 
 SCORING (TBA)
 
