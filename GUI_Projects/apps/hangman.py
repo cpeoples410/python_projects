@@ -20,7 +20,7 @@ Things needed for game:
         > allow player to pick one of the word lists
         > let user guess full word(s) (EXCLUDED FOR NOW)
         > (sounds similar to wheel of fortune)
-    - scoring
+    - Scoring
 """
 
 
@@ -39,7 +39,7 @@ board = ["_ _ _ _ ------| _ _",
 
 
 #-------------------------------------------------------------#
-
+#Will create class at a later time
 '''
 class Hangman:
     """Class that controls functionality of the game"""
@@ -83,7 +83,7 @@ class Hangman:
 
 #-------------------------------------------------------------#
 
-def replaceLetters(space, word, letter):
+def replaceSpaces(space, word, letter):
     """(string, char) -> 
 
     Replace all empty spaces with the letters
@@ -103,7 +103,7 @@ def run(target_word):
     while ('_' in space):
         guess = input("Guess a letter: ")
         if guess in target_word:
-            space = replaceLetters(space, target_word, guess)
+            space = replaceSpaces(space, target_word, guess)
         else:
             #will be changed
             print("Letter not found.")
