@@ -1,6 +1,6 @@
 import random as r
 import hangman_wordlist as hw
-import hangman_board as board
+import hangman_board as brd
 
 #Hangman Project
 """
@@ -21,16 +21,6 @@ Things needed for game:
         > (sounds similar to wheel of fortune)
     - Scoring
 """
-
-
-board = ["_ _ _ _ ------| _ _",
-         "_ _ _ _ | _ _ | _ _",
-         "_ _ _ _ _ _ _ | _ _",
-         "_ _ _ _ _ _ _ | _ _",
-         "_ _ _ _ _ _ _ | _ _",
-         "_ _ _ _ _ _ _ | _ _",
-         "_ _ _ _ _ _ _ | _ _",
-         "_ _ _ _ _ ____|____"]
 
 
 
@@ -81,7 +71,6 @@ class Hangman:
 '''
 
 #-------------------------------------------------------------#
-
 def createLines(word):
     """(string) -> string
 
@@ -117,15 +106,20 @@ def run(target_word):
     """(string) -> None"""
     hidden = createLines(target_word)
     print(hidden)
-    while ('_' in hidden):
+    while ('_' in hidden and brd.curr_key<6):
         guess = input("Guess a letter: ")
         if guess in target_word:
             hidden = showLetters(hidden, target_word, guess)
         else:
-            #will be changed
             print("Letter not found.")
+            brd.curr_key += 1
+            brd.curr_state = brd.board_state[brd.curr_key]
+        brd.printBoard(brd.curr_state)
         print(hidden)
-    print(hidden, "has been found")
+    if ('_' not in hidden):
+        print(f"{hidden} has been found!")
+    else:
+        print(f"GAME OVER! The word we were looking for is {target_word}")
 
 
 if __name__=="__main__":
