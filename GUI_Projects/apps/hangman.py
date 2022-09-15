@@ -1,5 +1,6 @@
 import random as r
 import hangman_wordlist as hw
+import hangman_board as board
 
 #Hangman Project
 """
@@ -95,8 +96,9 @@ def createLines(word):
             temp = temp + word[index]
     return temp
 
+
 def showLetters(space, word, letter):
-    """(string, char) -> string
+    """(char, string, char) -> string
 
     Return a new string where a target letter
     replaces an empty line.
@@ -109,6 +111,7 @@ def showLetters(space, word, letter):
             temp = temp + space[index]
     space = temp
     return space
+
 
 def run(target_word):
     """(string) -> None"""
