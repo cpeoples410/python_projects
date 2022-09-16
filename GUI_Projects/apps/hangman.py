@@ -94,8 +94,8 @@ def showLetters(space, word, letter):
     """
     temp = ""
     for index in range(len(word)):
-        if letter == word[index]:
-            temp = temp + letter
+        if (letter==word[index] or letter.upper()==word[index]):
+            temp = temp + word[index]
         else:
             temp = temp + space[index]
     space = temp
@@ -105,15 +105,18 @@ def showLetters(space, word, letter):
 def run(target_word):
     """(string) -> None"""
     hidden = createLines(target_word)
+    prev = hidden
     print(hidden)
     while ('_' in hidden and brd.curr_key<6):
         guess = input("Guess a letter: ")
-        if guess in target_word:
+        if guess.isalpha():
             hidden = showLetters(hidden, target_word, guess)
+            if prev==hidden:
+                print("Letter not found.")
+                brd.curr_key +=1
+                brd.curr_state = brd.board_state[brd.curr_key]
         else:
-            print("Letter not found.")
-            brd.curr_key += 1
-            brd.curr_state = brd.board_state[brd.curr_key]
+            print("Your guess must be a letter")
         brd.printBoard(brd.curr_state)
         print(hidden)
     if ('_' not in hidden):
@@ -137,7 +140,7 @@ if __name__=="__main__":
             counter+=1
         else:
             rand_word = r.choice(hw.CATEGORIES[category])
-            print(rand_word)
+            #print(rand_word)
             break
     if counter<4:
         run(rand_word)
