@@ -1,9 +1,12 @@
 HANGMAN PROCESS
 
+GUI
+	- Display hangman image, letters, and empty lines
+
 BOARD
-	- Hangman board (10%)
+	- Hangman board (50%)
 		> Need to change board when player
-		  guesses an incorrect letter / word
+		  guesses an incorrect letter / word (TESTING)
 	- Number of empty lines ('_') for letters (80%, TESTING)
 		> Need to separated line sequence if there are
 		  any non-alphabetical characters
