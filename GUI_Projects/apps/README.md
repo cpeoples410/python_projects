@@ -1,32 +1,32 @@
-HANGMAN PROCESS
+HANGMAN TODO LIST
 
-GUI
-	- Display hangman image, letters, and empty lines
+HANGMAN SCREENS
+	- FRAME 1 -> Start Screen
+		> Buttons that randomly selects a word
+		  from selected category
+		> Buttons that exits out of game
+		> Hangman Image (Displays board?)
+	- FRAME 2 -> Game Screen
+		> Board display
+			-> changes if person makes
+			   incorrect guess
+		> Empty letter spaces (_)
+			-> Will reveal letters if player
+			   guess correct letter(s)
+		> Buttons for letters
+			-> When selected, it will remove itself
+			-> Buttons are disabled when game ends
+		> Quit Button -> goes to Start Screen
+			      -> Will first asks if user wants to leave
 
-BOARD
-	- Hangman board (50%)
-		> Need to change board when player
-		  guesses an incorrect letter / word (TESTING)
-	- Number of empty lines ('_') for letters (80%, TESTING)
-		> Need to separated line sequence if there are
-		  any non-alphabetical characters
+CLASSES
+	- HangmanGUI   -> Class that runs game
+	- WordButton   -> Class for category buttons
+	- LetterButton -> Class for letter buttons
 
-FUNCTIONS
-	- showLetters 	-> replace spaces with letter if
-			   player guesses correct letter
-			   (80%, TESTING)
-	- run 		-> runs the game using helper functions
-			   (40%)
-	- guessWord	-> Player will guess what the word is
-			   (0%)
-	- createLines	-> Hide all letters with underscores
-			   (90%, TESTING)
-
-SCORING (TBA)
-
-OPTIONAL TASKS
-	- Create Hangman class
+OPTIONAL FEATURES
 	- Timer
-	- startGame 	-> allow player to pick a category and
-			   randomly select a word from that category
-			   (Need to create method)
+		-> Display timer
+	- Scoring
+		-> Scoring is based on time and
+		   the number of correct/incorrect guesses
