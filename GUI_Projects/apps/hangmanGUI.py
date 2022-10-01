@@ -2,10 +2,126 @@ import tkinter as tk
 import random as rand
 import hangman_wordlist as hwl
 import hangman_board as brd
+import time
 
 #HANGMAN GUI
 
+#NOT USING THIS CLASS
+class WordButton:
+    """Class that creates a button for a theme"""
 
+    def __init__(self, master, text, state, row, column):
+        self.master = master
+        #self.name = name
+        self.text = text
+        self.state = state
+        self.row = row
+        self.column = column
+        #store random word from hangman wordlist
+        self.rand_word = ""
+        
+
+        #MAKING THE BUTTON
+        self.btn_word = tk.Button(self.master, text=self.text, state=self.state)
+        #BINDING
+        self.btn_word.bind("<ButtonRelease>", self.change_frame)
+        #ADDING TO GRID
+        self.btn_word.grid(row=self.row, column=self.column)
+
+    #-----------[ METHODS ]-----------#
+    def get_rand_word(self):
+        """() -> None
+
+        Given a dictionary of CATEGORIES,
+        reassign rand_word to a random word from
+        one of the keys.
+        """
+        self.rand_word = hwl.CATEGORIES[self.text.lower()]
+        #print(self.rand_word)
+    
+    def change_frame(self, event):
+        """ """
+        self.get_rand_word()
+        self.master.destroy()
+        
+#NOT USING THIS CLASS
+class LetterButton:
+    """Class of buttons for letters. Similar to WordButton"""
+
+    def __init__(self, master, text, state, row, column):
+        self.master = master
+        self.text = text
+        self.state = state
+        self.row = row
+        self.column = column
+        self.letter = tk.StringVar()
+
+        self.btn_letter = tk.Button(self.master, text=self.text, state=self.state,
+                                    command=lambda: [self.remove_letter()])
+        self.btn_letter.grid(row=self.row, column=self.column)
+
+    #-----------[ METHODS ]-----------#
+    def get_letter(self):
+        """Grab the text of the button."""
+        self.letter.set(self.text)
+        
+    def remove_letter(self):
+        """When a button is clicked on, remove that button.1"""
+        self.btn_letter.destroy()
+
+
+
+#CLASS FOR TIMER (NEEDS WORK)
+class Timer:
+    """ """
+    def __init__(self):
+        self._start = 10
+        self._end = 0
+        self._time = "00:00"
+        
+    def run(self):
+        self.root = tk.Tk()
+        self.root.title("TIMER TEST")
+        self.root.geometry("200x200")
+
+        self.frm_time = tk.Frame(self.root)
+
+        self.lbl_time = tk.Label(self.frm_time, text=0,
+                                 font=("Bell Gothic Std Light", 20))
+        self.btn_start = tk.Button(self.root, text="START TIMER",
+                                   font=("Bell Gothic Std Light", 15),
+                                   command=self.countup)
+
+        self.btn_stop = tk.Button(self.root, text="STOP TIMER",
+                                  font=("Bell Gothic Std Light", 15),
+                                  command=self.stop_time)
+        
+        self.lbl_time.grid(row=0, column=0)
+        self.frm_time.pack()
+        self.btn_start.pack()
+
+        self.root.mainloop()
+
+    def stop_time(self):
+        temp = 0
+        self.lbl_time["text"] = temp
+        self.root.after_cancel(self.countup)
+        self.root.after(1000, self.stop_time)
+
+
+    def countup(self):
+        self.btn_stop.pack()
+        now = self.lbl_time["text"] + 1
+        self.lbl_time.configure(text=now)
+        self.root.after_cancel(self.stop_time)
+        self.root.after(1000, self.countup)
+
+
+
+
+
+
+#----------------------------------------------------------------#
 class HangmanGUI:
     """Class for hangman game"""
 
@@ -19,6 +135,7 @@ class HangmanGUI:
         #VARIABLE FOR RANDOM WORD
         self.category = ""
         self.target_word = ""
+        self.quit_flag = 0
 
         #TITLE FOR THE GAME
         self.lbl_title = tk.Label(self.window, text="HANGMAN",
@@ -65,12 +182,16 @@ class HangmanGUI:
         self.board_stage = "".join(brd.board_state[self.stage])
         #print(board_stage)
 
+        #LABEL FOR TIMER
+        self.lbl_time = tk.Label(self.window, text=0)
 
+
+        #HANGMAN IMAGE
+        self.lbl_board = tk.Label(self.window, text=self.board_stage)
+        #self.lbl_board.pack()
+        
         #FRAME FOR GAME SCREEN
         self.frm_game = tk.Frame(self.window)
-        #HANGMAN IMAGE
-        self.lbl_board = tk.Label(self.frm_game, text=self.board_stage)
-        self.lbl_board.grid(row=100, columnspan=13)
 
         #LABEL FOR CHOOSEN CATEGORY
         self.lbl_category = tk.Label(self.frm_game, text=self.category)
@@ -186,6 +307,11 @@ class HangmanGUI:
                                                 self.remove_button(self.btn_Z),
                                                 self.end_condition()])
 
+        self.btn_pause = tk.Button(self.frm_game, text="PAUSE",
+                                   command=self.pause_game)
+        self.btn_quit = tk.Button(self.frm_game, text="QUIT",
+                                  command=self.quit_game)
+
         self.btn_A.grid(row=300, column=0)
         self.btn_B.grid(row=300, column=1)
         self.btn_C.grid(row=300, column=2)
@@ -213,11 +339,19 @@ class HangmanGUI:
         self.btn_X.grid(row=400, column=10)
         self.btn_Y.grid(row=400, column=11)
         self.btn_Z.grid(row=400, column=12)
+
+        self.btn_pause.grid(row=500, column=0, columnspan=6)
+        self.btn_quit.grid(row=500, column=7, columnspan=6)
+
+        #FRAME THAT ASKS PLAYER TO PLAY ANOTHER GAME
+        self.frm_replay = tk.Frame(self.window)
+        #LABEL THAT ASKS IF USER WANTS TO QUIT
+        self.lbl_ask = tk.Label(self.window, text="DO YOU WANT TO QUIT?")
         
         self.window.mainloop()
 
 
-    #----------[ METHODS ]----------#
+    #------------------------[ METHODS ]------------------------#
     def get_rand_word(self, button):
         """(tk.Button) -> None
 
@@ -237,6 +371,7 @@ class HangmanGUI:
 
     def show_frame(self):
         """Shows a frame"""
+        self.lbl_board.pack()
         self.frm_game.pack()
 
     def hide_letters(self):
@@ -248,7 +383,7 @@ class HangmanGUI:
             else:
                 temp = temp + self.target_word[i]
         self.lbl_hidden["text"] = temp
-        print(self.lbl_hidden["text"],len(self.lbl_hidden["text"]))
+        #print(self.lbl_hidden["text"],len(self.lbl_hidden["text"]))
 
     def word_found(self):
         """(None) -> boolean
@@ -302,6 +437,30 @@ class HangmanGUI:
         elif (self.word_found()==False) and (self.stage==6):
             self.lbl_category["text"] = "Sorry! We were looking for: " + self.target_word
 
+    def pause_game(self):
+        """Stops the timer"""
+        print("PAUSED TESTINTG...")
+
+    def resume_game(self):
+        """Starts the game if the game was paused"""
+        print("RESUME TESTING...")
+
+    def quit_game(self):
+        """
+        Quits the game. Prompts new window that asks
+        if user is certain if they want to quit.    
+        """
+        self.lbl_ask.pack()
+        if (self.quit_flag==0):
+            self.quit_flag = 1
+        else:
+            self.window.destroy()
+        #print("QUIT TESTING...")
+
+    def replay(self):
+        """Ask player if they want to play another game"""
+        self.frm_game.pack_forget()
+        self.frm_replay.pack()
+
 
 HangmanGUI()
-
