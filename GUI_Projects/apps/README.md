@@ -26,7 +26,13 @@ CLASSES
 
 OPTIONAL FEATURES
 	- Timer
-		-> Display timer
+		-> Display timer that will run automatically
+		-> Stop timer when game is paused
+		-> Resets timer when entering/quitting new game
 	- Scoring
 		-> Scoring is based on time and
 		   the number of correct/incorrect guesses
+
+Link to different types of fonts:
+https://stackoverflow.com/questions/39614027/list-available-font-families-in-tkinter
+
