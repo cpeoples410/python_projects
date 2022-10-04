@@ -1,37 +1,41 @@
 HANGMAN TODO LIST
 
-HANGMAN SCREENS
-	- FRAME 1 -> Start Screen
-		> Buttons that randomly selects a word
-		  from selected category
-		> Buttons that exits out of game
-		> Hangman Image (Displays board?)
-	- FRAME 2 -> Game Screen
-		> Board display
-			-> changes if person makes
-			   incorrect guess
-		> Empty letter spaces (_)
-			-> Will reveal letters if player
-			   guess correct letter(s)
-		> Buttons for letters
-			-> When selected, it will remove itself
-			-> Buttons are disabled when game ends
-		> Quit Button -> goes to Start Screen
-			      -> Will first asks if user wants to leave
+WHAT ARE DONE:
+FRAME 1 -> START SCREEN
+	- Buttons that randomly selects a word from selected category
+	- Buttons that exits out of game
+
+FRAME 2 -> GAME SCREEN
+	- Board display that changes after incorrect guess
+	- Empty letter spaces (_)
+	- Letter buttons
+	- Quit Button
+	- Timer
+
+FRAME 3 -> REPLAY
+	- Appears after end of game
+	- Asks user if they want to play another game
+	- YES/NO buttons
+
+
+WHAT TO WORK ON:
+FRAME 1
+	- Add an image to the start menu?
+FRAME 2
+	- Add PAUSE AND RESUME buttons
+	- Bind methods to new buttons
+FRAME 3:
+	- Create and bind methods to YES/NO buttons
+
+OPTIONAL
+	- Scoring (based on time, number of letters and incorrect guesses)
+
 
 CLASSES
 	- HangmanGUI   -> Class that runs game
-	- WordButton   -> Class for category buttons
-	- LetterButton -> Class for letter buttons
+	- WordButton   -> Class for category buttons (EXCLUDE)
+	- LetterButton -> Class for letter buttons (EXCLUDE)
 
-OPTIONAL FEATURES
-	- Timer
-		-> Display timer that will run automatically
-		-> Stop timer when game is paused
-		-> Resets timer when entering/quitting new game
-	- Scoring
-		-> Scoring is based on time and
-		   the number of correct/incorrect guesses
 
 Link to different types of fonts:
 https://stackoverflow.com/questions/39614027/list-available-font-families-in-tkinter
