@@ -34,7 +34,7 @@ class HangmanGUI:
         self.frm_start = tk.Frame(self.window)
         self.lbl_options = tk.Label(self.frm_start, text="Choose a Theme",
                                     font=("Bell Gothic Std Light", 15))
-        self.lbl_options.grid(row=100, columnspan=5)
+        self.lbl_options.grid(row=100, columnspan=7)
         
         #BUTTONS FOR CATEGORY BUTTONS
         self.btn_animal = tk.Button(self.frm_start, text="ANIMAL",
@@ -57,12 +57,22 @@ class HangmanGUI:
                                    command=lambda: [self.get_rand_word(self.btn_games),
                                                     self.hide_letters(), self.show_game_frame(),
                                                     self.start_clock()])
+        self.btn_holidays = tk.Button(self.frm_start, text="HOLIDAYS",
+                                      command=lambda: [self.get_rand_word(self.btn_holidays),
+                                                       self.hide_letters(), self.show_game_frame(),
+                                                       self.start_clock()])
+        self.subjects = tk.Button(self.frm_start, text="CLASS SUBJECTS",
+                                  command = lambda: [self.get_rand_word(self.subjects),
+                                                     self.hide_letters(), self.show_game_frame(),
+                                                     self.start_clock()])
         #GRIDS FOR BUTTONS
         self.btn_animal.grid(row=200, column=0)
         self.btn_sports.grid(row=200, column=1)
         self.btn_food.grid(row=200, column=2)
         self.btn_toons.grid(row=200, column=3)
         self.btn_games.grid(row=200, column=4)
+        self.btn_holidays.grid(row=200, column=5)
+        self.subjects.grid(row=200, column=6)
         
         self.frm_start.pack()
 
