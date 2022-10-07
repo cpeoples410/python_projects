@@ -346,9 +346,6 @@ class HangmanGUI:
         self.board_stage = "".join(brd.board_state[self.stage])
         self.lbl_board["text"] = self.board_stage
 
-    def reset_hidden(self):
-        print()
-
     #WORKS
     def reset_game(self):
         """Resets the game, wiping out previous data"""
