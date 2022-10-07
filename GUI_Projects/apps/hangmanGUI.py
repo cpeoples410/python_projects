@@ -192,7 +192,7 @@ class HangmanGUI:
         self.btn_Y.grid(row=400, column=11)
         self.btn_Z.grid(row=400, column=12)
         
-        
+        #BUTTONS THAT AFFECT TIMER AND WINDOW
         self.btn_pause = tk.Button(self.frm_game, text="PAUSE",
                                    command=self.pause_game)
         self.btn_resume = tk.Button(self.frm_game, text="RESUME",
@@ -204,12 +204,11 @@ class HangmanGUI:
         
         #LABEL THAT ASKS IF USER WANTS TO QUIT
         self.lbl_ask = tk.Label(self.window, text="DO YOU WANT TO QUIT?")
-        
 
         #FRAME THAT ASKS PLAYER TO PLAY ANOTHER GAME
         self.frm_replay = tk.Frame(self.window)
+        
         self.lbl_replay = tk.Label(self.frm_replay, text="DO YOU WANT TO PLAY AGAIN?")
-
         self.btn_yes = tk.Button(self.frm_replay, text="YES",
                                  command=lambda: [self.play_again(self.btn_yes)])
         self.btn_no = tk.Button(self.frm_replay, text="NO",
@@ -235,11 +234,6 @@ class HangmanGUI:
         self.lbl_category["text"] = self.category
         L = hwl.CATEGORIES[self.category.lower()]
         self.target = rand.choice(L).upper()
-
-    #NOT USING; WILL REMOVE FRAME IN METHOD BELOW
-    def remove_start_frame(self):
-        """Removes the frame"""
-        self.frm_start.pack_forget()
 
     #NEED TO CHECK THIS CODE
     def show_game_frame(self):
@@ -274,7 +268,6 @@ class HangmanGUI:
         self.stage +=1
         self.board_stage = "".join(brd.board_state[self.stage])
         self.lbl_board["text"] = self.board_stage
-        #print(self.stage, self.board_stage)
 
     def find_letter(self, button):
         """(tk.Button) -> None
@@ -314,7 +307,7 @@ class HangmanGUI:
         self.lbl_timer["text"] = 0
         
     #-----------------------------------
-    #NEEDS TO DISABLE LETTER BUTTONS?
+    #WORKS
     def pause_game(self):
         """Stops the timer"""
         self.stop_clock()
@@ -347,18 +340,22 @@ class HangmanGUI:
             button["state"] = "normal"
         self.letters_found = []
         
-    #WORKS (opional?)
+    #WORKS
     def reset_board(self):
         self.stage = 0
         self.board_stage = "".join(brd.board_state[self.stage])
         self.lbl_board["text"] = self.board_stage
 
-    #WORKS???
+    def reset_hidden(self):
+        print()
+
+    #WORKS
     def reset_game(self):
         """Resets the game, wiping out previous data"""
         self.reset_clock()
         self.reset_board()
         self.reset_letters()
+        self.hidden = ""
         self.lbl_timer.pack_forget()
         self.lbl_board.pack_forget()
         self.frm_replay.pack_forget()
@@ -381,7 +378,7 @@ class HangmanGUI:
         """
         Change label based on conditions.
 
-        The player WINS if tthe word has been found before
+        The player WINS if the word has been found before
         the image was completed. The player LOSES if the
         image was completed before he word was found.
         """
@@ -389,7 +386,7 @@ class HangmanGUI:
             self.lbl_category["text"] = "YOU WIN!"
             self.stop_clock()
             self.show_replay_frame()
-        elif (self.word_found()==False) and (self.stage==6):
+        elif (self.lbl_hidden["text"]!=self.target) and (self.stage==6):
             self.lbl_category["text"] = "Sorry! We were looking for: " + self.target
             self.stop_clock()
             self.show_replay_frame()
