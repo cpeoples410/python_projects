@@ -1,31 +1,33 @@
 HANGMAN TODO LIST
 
-WHAT ARE DONE:
+WHAT IS DONE:
 FRAME 1 -> START SCREEN
-	- Buttons that randomly selects a word from selected category
-	- Buttons that exits out of game
+Buttons that randomly selects a word from selected category
 
 FRAME 2 -> GAME SCREEN
-	- Board display that changes after incorrect guess
-	- Empty letter spaces (_)
-	- Letter buttons
-	- Quit Button
-	- Timer
+Board display that changes after incorrect guess
+Empty letter spaces (_)
+Letter buttons
+Quit button
+Pause/Resume buttons
+Timer
 
 FRAME 3 -> REPLAY
-	- Appears after end of game
-	- Asks user if they want to play another game
-	- YES/NO buttons
+Appears after end of game
+Asks user if they want to play another game
+YES/NO buttons
 
 
 WHAT TO WORK ON:
 FRAME 1
-	- Add an image to the start menu?
+Add an image to the start menu?
+Button that exits out of game (optional)
+
 FRAME 2
-	- Add PAUSE AND RESUME buttons
-	- Bind methods to new buttons
+(TBD)
+
 FRAME 3:
-	- Create and bind methods to YES/NO buttons
+(TBD)
 
 OPTIONAL
 	- Scoring (based on time, number of letters and incorrect guesses)
