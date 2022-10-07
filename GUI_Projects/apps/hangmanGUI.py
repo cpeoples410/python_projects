@@ -385,7 +385,7 @@ class HangmanGUI:
         the image was completed. The player LOSES if the
         image was completed before he word was found.
         """
-        if (self.word_found() == True):
+        if (self.lbl_hidden["text"]==self.target):
             self.lbl_category["text"] = "YOU WIN!"
             self.stop_clock()
             self.show_replay_frame()
